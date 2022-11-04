@@ -13,14 +13,18 @@ knitr::opts_chunk$set(
 )
 ```
 
-This package is a template for creating your own custom color palette package. Having your own color palette package will make it easy for you (and your labmates, teammates, etc) to use a consistent color palette for the same identifiers in your data. For example, the Wolfe Lab at Tufts University has approximately a dozen members working with the same species of microbes. I wrote WolfeR to make it trivial for each lab member to use the same colors to refer to the same species. 
+This package is a template for creating your own custom color palette package. Having your own color palette package will make it easy for you (and your labmates, teammates, etc) to use a consistent color palette for the same identifiers in your data. For example, the Wolfe Lab at Tufts University has approximately a dozen members working with the same species of microbes. I wrote [WolfeR](https://github.com/cbedwards/wolfeR) to make it trivial for each lab member to use the same colors to refer to the same species. 
 
 ## Working with packages in R
 
-To create your own package from this template, you'll need a few tools set up:
+If this is your first time developing your own R package, welcome! You'll need/want to set up a few things, but once you do you're set to make as many packages as your heart desires! "Developing your own package" may sound scary, but the actual package development here will only involve tweaking a couple of files. I'll walk through that process below. For a clear and broader treatment of package development, [check out this awesome resource](https://r-pkgs.org/).
 
-  - git and github [see Happy Git with R](https://happygitwithr.com/)
-  - For windows: [Rtools](https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html).
+First things first:
+
+
+  - You'll probably want git and github for version control and for deploying your package so that your teammates/labmates can use it too. If you haven't done this before, it's a bit involved to explain here, but there's an excellent walk-through: [Happy Git with R](https://happygitwithr.com/)
+  - You'll need the software to compile an R package. These vary by operating system, and there's a nice summary with links [here](https://support.posit.co/hc/en-us/articles/200486498-Package-Development-Prerequisites).
+  -
 
 ```{r}
 library(ggplot2)
