@@ -1,0 +1,17 @@
+Package: PalettePackager
+Title: Template package for creating your own team / lab palette package
+Version: 0.0.0.9000
+Authors@R: 
+    person("Collin", "Edwards", , "edwards.evoeco@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-4937-5159"))
+Description: This package provides the framework to easily create your own custom palette package for yourself, your lab, or your team. This streamlines consistent color schemes for the same groups or taxa across figures, projects, and teammates.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.1
+Imports: 
+    ggplot2
+Suggests: 
+    dplyr,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
