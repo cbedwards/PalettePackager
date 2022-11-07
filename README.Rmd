@@ -13,208 +13,81 @@ knitr::opts_chunk$set(
 )
 ```
 
-This package is a template for creating your own custom color palette package. Having your own color palette package will make it easy for you (and your labmates, teammates, etc) to use a consistent color palette for the same identifiers in your data. For example, the Wolfe Lab at Tufts University has approximately a dozen members working with the same species of microbes. I wrote [WolfeR](https://github.com/cbedwards/wolfeR) to make it trivial for each lab member to use the same colors to refer to the same species. 
+This package is a template for creating your own custom color palette package. Having your own color palette package will make it easy for you (and your labmates, teammates, etc) to use a consistent color palette for the same identifiers in your data. For example, the Wolfe Lab at Tufts University has approximately a dozen members working with the same species of microbes. I wrote [WolfeR](https://github.com/cbedwards/wolfeR) to make it trivial for each lab member to use the same colors to refer to the same species.
 
 ## Working with packages in R
 
-If this is your first time developing your own R package, welcome! You'll need/want to set up a few things, but once you do you're set to make as many packages as your heart desires! "Developing your own package" may sound scary, but the actual package development here will only involve tweaking a couple of files. I'll walk through that process below. For a clear and broader treatment of package development, [check out this awesome resource](https://r-pkgs.org/).
+If this is your first time developing your own R package, welcome! You'll need to set up a few things before you get started with this package in particular, but once you do, you're set to make as many packages as your heart desires! "Developing your own package" may sound scary, but the actual package development with `PalettePackager` will only involve modifying a couple of files. I'll walk through that process below. For a broader treatment of package development, [check out this awesome resource](https://r-pkgs.org/).
 
 First things first:
 
+-   You'll probably want git and to set up github for version control and for deploying your package so that your teammates/labmates can use it too. (These are both free). It's a bit involved to explain here, but there's an excellent walk-through on using git with Rstudio at [Happy Git with R](https://happygitwithr.com/). I'm going to assume you're using GitHub to share your package, so you'll need to create a GitHub account if you don't have one.
+-   You'll need the (free) software to compile an R package. These vary by operating system, and there's a nice summary with links [here](https://support.posit.co/hc/en-us/articles/200486498-Package-Development-Prerequisites).
+-   You'll need to install the `devtools` library. If you start to explore more package development, you'll probably want the `usethis` and `testthat` packages, so you might install them now.
 
-  - You'll probably want git and github for version control and for deploying your package so that your teammates/labmates can use it too. If you haven't done this before, it's a bit involved to explain here, but there's an excellent walk-through: [Happy Git with R](https://happygitwithr.com/)
-  - You'll need the software to compile an R package. These vary by operating system, and there's a nice summary with links [here](https://support.posit.co/hc/en-us/articles/200486498-Package-Development-Prerequisites).
-  -
+## Using this template to make your own package
 
-```{r}
-library(ggplot2)
-library(dplyr)
-library(palettePackager)
+There are several ways to create a new git repository with this project's files in the template, but an easy one is:
+
+1.  Make a new, empty repository on GitHub for yourself. Call it whatever you want to call your version of the package. Things will probably be less confusing for you if it has a name that's distinct from `PalettePackager`. For this demonstration, I'm creating a new package that I'm calling `PaletteShareTest`. (Note that since this is on *your* github account, it can have the same name as mine! It might just get confusing to keep track of.)
+
+2.  In Rstudio, make a new project, and choose "Version Control" in the creation wizard![](images/paste-8E684BD4.png)
+
+3.  Give the web address of your new GitHub repository in the creation wizard. Pro tip: it's nice to have a repositories folder on your computer, that all your repos can live in. I've creatively called mine "repos". Git and GitHub will be acting as your backup and cross-computer access, so this doesn't need to live within a cloud storage drive like dropbox.![](images/paste-C044F571.png)\
+    This will create a folder on your computer that will house your new package. This will also open up Rstudio in the project for that packaged. But it's empty! Let's get all the files from the template
+
+4.  Download the directory of PalettePackager from my GitHub page to on your own computer. On a browser, you can click on the "Code" button to get a dropdown with an option to download a ZIP of the directory![](images/paste-01904E30.png)
+
+5.  We want to move most of those files to our new project directory, but not the ones that were already created when we made our *new* project (except .gitignore, which we want to move). Extract the contents from that zipped folder somewhere convenient. Copy the contents to the folder of your new project EXCEPT: the hidden `.git` folder, the hiden `.Rproj.user` folder, and the `PalettePackager.Rproj` file. You will get asked if you want to replace the "old" .gitignore file with the new one you copied in. Yes you do.![](images/paste-B71E8AD7.png)
+
+    Wooo! We should be there! You'll want to make this package your own, but we can do a quick check to make sure that everything worked! Try running the following code:
+
+```{=html}
+<!-- -->
 ```
+    library(devtools) #this loads the package-making packages we want.
+    check()
 
+This will run through a bunch of diagnostics to make sure the new package is viable (this will take a few minutes). You should get no errors or warnings, but you'll get a note about a non-standard file/directory at the top level. This is because you haven't changed the name of the package, and the diagnostics tools are noticing that your project name isn't the same as your package name. If you want to, you can even install your package on your local machine already, using the `install()` command.
 
-# 
+## Making the package yours
 
-<!-- badges: start -->
-<!-- badges: end -->
+Before we worry about adding your custom color palettes, let's update the package description to use *your* name and *your* package name. Open the DESCRIPTION file. We can easily access it using the "Files" window in Rstudio:
 
-The goal of wolfeR is to streamline  color schemes for plots of the microbes used in the Wolfe lab at Tufts.
+![](images/paste-35782FDD.png)
 
-## Installation
+With that file open:
 
-You can install the development version of wolfeR from [GitHub](https://github.com/) with:
+1.  Change the package name to the exact name of your project folder. You can also change the title to something more meaningful to you![](images/paste-81B1DAC5.png)
 
-``` r
-# install.packages("devtools")
-devtools::install_github("cbedwards/wolfeR")
+2.  Update the author information to represent your name, email address, and ORCID rather than mine. If you don't have an ORCID, you can just cut out the entire `comment =`... bit. ![](images/paste-8B875D39.png)
+
+3.  You should probably also update the description line to be meaningful for your project\
+    ![](images/paste-6429D04B.png)
+
+4.  Make sure you've saved your DESCRIPTION file.
+
+5.  `PalettePackager` includes a few tests written using the `testthat` framework. We need to update the settings for `testthat` with your new package name. We can do that with
+
+        library(usethis)
+        use_testthat()
+
+    When it asks, yes we want to overwrite the previous file `test/testthat.R`
+
+6.  Update your readme with a blank slate:\
+
+```{=html}
+<!-- -->
 ```
+    library(usethis)
+    use_readme_rmd()
 
-## Useage
+When it asks, yes you want to overwrite.
 
-We often need to create plots of microbial abundance either aggregated into bar plots or showing time series from experiments. The goal here is streamline the process of using consistent colors for each taxa/species, so that plots have consistent color interpretation across presentations, publications, and working documents. This package provides ready-made access to formalized color palettes in the form of a few functions that integrate with ggplot. 
+You did it! Your package is now YOUR package (although it currently doesn't have any new packages). To make sure everything worked, run `check()` again. You should be all clear expect for that same pesky note, which we'll get to in a bit.
 
-### generating data
+This is probably a good time to commit and push to github.\
 
-Let's start with some simulated data that resembles real time series data from the Wolfe lab. Here we're imagining we carried out an experiment where we measured the abundance of three species across four time points, using three replicates each. 
+## Outline of the idea
 
-```{r}
-dat = as.data.frame(expand.grid(name = c("candida", "vibrio",
-                                         "brachybacterium"), #species name
-                                day = c(1, 3, 7, 14, 21), #day of time series
-                                rep = 1:3,#replicate number
-                                stringsAsFactors = FALSE))
-dat$count = 500 + #baseline
-  100000 * (dat$day>1) +  #population generally gets near carrying capacity
-  #  after first measurement
-  (dat$day>1) * -20000*(dat$name == "candida") +#make candida CC lower
-  (dat$day>1) *  30000*(dat$name == "vibrio") + #make vibrio CC higher
-  (dat$day>1) * runif(nrow(dat), min = -20000, max = 20000)
-# add some random noise to observations except day 1
-```
-
-### without wolfeR
-
-ggplot figures default to a single color scheme, which (a) doesn't match Wolfe lab publications, but also (b) is based on the data given. So if we make a plot for one experiment in which we had four species, and another plot for a second experiment with four species, two of which overlapped with the first, there is no guarantee that any of the colors match up between our two plots (even though we would want the two overlapping species to use the same colors).
-
-Here's what the time series looks like for our simulated data: 
-
-```{r}
-ggplot(data = dat, aes(x = day,
-                       y = count,
-                       group = interaction(name, rep),
-                       color = name))+
-  geom_path(size = 0.8)+
-  geom_point(size = 2)+
-  scale_y_log10()+
-  ggtitle("Simulated time series, 3 replicates per species")
-
-```
-
-And here's what the barplots of that same data would look like, averaging across replicates and separated across days with `facet_wrap()`:
-
-```{r}
-dat.summary = dat %>%
-  group_by(name, day) %>%
-  summarize(count = mean(count))
-ggplot(data = dat.summary,
-       aes(x = name, y = count, fill = name))+
-  geom_col()+
-  facet_wrap(~ day)+
-  xlab("")+
-  ggtitle("Simulated summary data, separated by day of experiment")
-```
-
-
-
-### Using wolfeR for colors
-
-First, we need to choose which color palette we want. See `help("make_colorvec")` for details; as of the writing of this README, only the color scheme based on Wolfe 2014 (`palette.name = "wolfe2014"`) is implemented. We can visualize a palette with `palette_vis()`.
-
-```{r, fig.height = 7, fig.width = 12}
-## showing the default palette
-palette_vis("wolfe2014")
-```
-
-With the palette in mind, we should check that our data doesn't have any taxa / names that aren't present in the color palette. `palette_check()` is our friend there.
-
-```{r}
-# check the palette
-palette_check(dat$name, "wolfe2014")
-```
-
-As an experiment, let's see what happens if we give it a vector with some non-represented taxa. I'll give a vector of names that are reasonable, plus the species name for common milkweed. 
-
-```{r}
-# check the palette
-palette_check(c("candida", "vibrio", "brachybacterium", "Asclepias syriaca"), "wolfe2014")
-```
-
-KEY POINT: We need *exact* matches between the names in your data and the names in the palette, including capitalization etc. If it seems like the palette should be working, but it's not, check for typos, capitalization, spaces, etc. 
-
-Okay, but when we checked our actual data, with `palette_check(dat$name, "wolfe2014")`, it gave us the all-clear. 
-
-Now we can re-create our figures using the new color palette. If we're working with points and lines, `scale_color_wolfe()` will (generally) add the appropriate colors (for some non-default types of points, we may need to use fill instead). If we're working with bars etc, `scale_fill_wolfe()` will add the appropriate colors. 
-
-These functions both need (a) the vector of taxa names from the data being used (the `dat.names` argument), and (b) the name of the color palette (the `palette.name` argument, defaults to `"wolfe2014"`. (a) seems silly, but is actually really important, because if ggplot gets a list of colors that includes taxa not in our data, it behaves poorly (it assumes we want a color gradient instead, and gives gray colors).
-
-```{r}
-ggplot(data = dat, aes(x = day,
-                       y = count,
-                       group = interaction(name, rep),
-                       color = name))+
-  geom_path(size = 0.8)+
-  geom_point(size = 2)+
-  scale_y_log10()+
-  scale_color_wolfe(dat.names = dat$name, palette.name = "wolfe2014")+
-  ggtitle("Simulated time series, 3 replicates per species")
-
-```
-
-
-
-```{r}
-ggplot(data = dat.summary,
-       aes(x = name, y = count, fill = name))+
-  geom_col()+
-  facet_wrap(~ day)+
-  xlab("")+
-  scale_fill_wolfe(dat.names = dat$name, palette.name = "wolfe2014")+
-  ggtitle("Simulated summary data (by day of experiment)")
-
-```
-
-TECHNICAL NOTE: these two functions are mostly just wrappers for `scale_fill_discrete()` and `scale_color_discrete()`, and so can be treated just like any other ggplot layer, including adding to existing objects, etc.
-
-## What if I'm working with some new taxa but still want to use a palette for the remaining taxa?
-
-`scale_fill_discrete()` and `scale_color_discrete()` both have an optional argument, `augment`, that allows you to provide a data frame with the new taxa and corresponding colors. As this is likely to be a somewhat iterative process (checking to see if you have all the taxa represented, adding a new taxa, checking again), `palette_augment_helper()` assists in testing your augments to see if they are sufficient or if there are redundancies between them and the palette. For the iterative process, you will want to specify the list of names in the data, provide the augment data frame (if you have it, but if you're just starting you can not specify it, and the function will list the missing colors), and provide the palette name. If you find you don't want the plot of the augmented palette with each iteration, or don't want the list of all taxa already covered in the palette, you can set `plot.palette = FALSE` and `spellcheck = FALSE`.
-
-Here's an example, with some simple fake data that includes taxa present in the "wolfe2014" palette, and new taxa
-
-```{r}
-# set up example data. here we only care about the column with our names that
-# we want to base our colors off of
-dat = data.frame(spec = c("arthrobacter",
-                          "yaniella",
-                          "vibrio",
-                          "asclepias",
-                          "drosophila"),
-                 vals = rnorm(5))
-
-## first attempt at our augment:
-aug = data.frame(name = c("asclepias", "vibrio"),
-                 color = c("coral", "blue"))
-
-palette_augment_helper(dat.names=dat$spec,
-                       palette.name = "wolfe2014",
-                       augment = aug)
-## oops! Palette already has vibrio! And we're missing drosophila
-
-aug = data.frame(name = c("asclepias", "drosophila"),
-                 color = c("coral", "purple"))
-
-palette_augment_helper(dat.names=dat$spec,
-                       palette.name = "wolfe2014",
-                       augment = aug)
-## Looks like we're good!
-
-ggplot(dat, aes(x = spec, y = vals, fill = spec))+
-  geom_col()+
-  scale_fill_wolfe(dat$spec,
-                   palette.name = "wolfe2014",
-                   augment = aug)
-
-
-```
-
-
-## adding new color palettes
-
-It is very easy for me to add new color palettes to the package if I'm given 
--  the name for the new color palette
--  a list of the taxa names 
--  a list of the corresponding colors, in R readable format (either character strings for R colors, or in hex code (the format that starts with a # sign.. I found that [this site](https://colors.artyclick.com/) was handy for extracting colors from publications. 
-
-If you're developing a palette from scratch for your data set, the `palette_augment_helper()` function can again be helpful. If you don't give it a `palette.name` argument, it just compares the proposed augment to the data and identifies missing colors (plus plots the color scheme of the augment). I find this helpful for iteratively building a new palette for my data.
-
-If you are managing your own package, the `augment2palette()` function gives step-by-step instructions for adding your new palette (in the form of an augment) to the package. This function won't change any of your code, just give you direction to simplify/streamline modifying your package.
+## Example using PalmerPenguin data
