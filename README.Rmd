@@ -81,12 +81,25 @@ With that file open:
 ```
     library(usethis)
     use_readme_rmd()
+    build_readme()
 
-When it asks, yes you want to overwrite.
+When it asks, yes you want to overwrite the old .Rmd file.
 
 You did it! Your package is now YOUR package (although it currently doesn't have any new packages). To make sure everything worked, run `check()` again. You should be all clear expect for that same pesky note, which we'll get to in a bit.
 
-This is probably a good time to commit and push to github.\
+This is probably a good time to commit and push to github. Check out [Happy Git with R](https://happygitwithr.com/) for details, but you should be able to hit the "GIT" button on the main menu, and choose the "commit" option\
+![](images/paste-F109F940.png)
+
+Then hit the checkbox next to each item to make sure they are "staged" (telling git that yes, you want to track them).
+
+![](images/paste-5DC8EF07.png)\
+Add a commit message explaining what you've done at this point (ie "Setting up my package, have updated authorship and package names"), and hit the "commit" button.
+
+![](images/paste-D383B20D.png)You'll get a window pop up with the details as git commits your files. (This is also where potential issues can pop up, if something didn't work right). ![](images/paste-B36A7331.png)When it's done, a bunch of details will show in the window, and the "Stop" button will turn into a "Close button. The commit is a checkpoint in git which you can revert back to if anything goes sideways in the future. Right now, though, your commit is only your computer. To push this commit (including the files and directory structure) to your GitHub repository, hit the "push" button.
+
+![](images/paste-E79571AF.png)
+
+Now you should be able to see the directory structure and files in your github repository. Victory!
 
 ## Outline of the idea
 
